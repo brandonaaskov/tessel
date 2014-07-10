@@ -1,16 +1,21 @@
 var tessel = require('tessel'),
-  _ = require('underscore'),
-  gpio = tessel.port['GPIO'],
-  pin = gpio.pin['G6']
+    http = require('http'),
+//  _ = require('underscore'),
+    gpio = tessel.port['GPIO'],
+    pin = gpio.pin['G6']
 
 pin.input()
-console.log(pin, [pin.mode(), pin.type])
 
-onSignalFell = function (time, type) {
-  console.log('signal fell')
-  spawn('afplay', ['woot.m4a'])
+var onDoorClosed = function (time, type) {
+  console.log('door closed')
+  http.get('http://data.sparkfun.com/input/6JZVMozQLWsqWNlJQ4a4?private_key=Ww0dDWk8x2hagRPxXNBN&door_open=closed')
 }
 
-pin.on('fall', _.throttle(function (time, type) {
-  console.log('signal fell', spawn)
-}, 2000))
+var onDoorOpened = function (time, type) {
+  console.log('door opened')
+  http.get('http://data.sparkfun.com/input/6JZVMozQLWsqWNlJQ4a4?private_key=Ww0dDWk8x2hagRPxXNBN&door_open=open')
+}
+
+pin.on('fall', onDoorOpened)
+pin.on('rise', onDoorClosed)
+console.log('waiting for door...')

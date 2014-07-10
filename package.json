@@ -1,0 +1,22 @@
+{
+  "name": "tessel",
+  "version": "0.0.0",
+  "description": "tessel ======",
+  "main": "blinky.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/brandonaaskov/tessel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brandonaaskov/tessel/issues"
+  },
+  "homepage": "https://github.com/brandonaaskov/tessel",
+  "devDependencies": {
+    "underscore": "~1.6.0"
+  }
+}
